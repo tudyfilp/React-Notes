@@ -1,0 +1,63 @@
+.loginWrapper{
+    width: 600px;
+    height: 400px;
+    background: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: .5rem;
+}
+h3 {
+    position: relative;
+    letter-spacing: 2px;
+}
+
+h3::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 3px;
+    background: black;
+    bottom: -.5rem;
+    left: calc(50% - 20px);
+}
+
+input {
+    position: relative;
+    display: block;
+    margin-left: 100px;
+    width: 400px;
+    border-radius: 0;
+    border: 2px solid transparent;;
+    border-bottom-color:black;
+    margin-top: 100px;
+    padding: .5rem;
+    transition: border-color .3s ease-in-out;
+    font-weight: bolder;
+}
+
+input:focus {
+    border-color: black;
+}
+
+input::placeholder {
+    color: black;
+}
+
+button {
+    padding: .5rem 1rem;
+    position: relative;
+    margin-top: 100px;
+    background: white;
+    color: black;
+    border: 2px solid black;
+    font-weight: 700;
+    border-radius: .25rem;
+    transition: all .3s ease-in-out;
+}
+
+button:hover {
+    color: white;
+    background: black;
+}

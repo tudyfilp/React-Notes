@@ -1,0 +1,89 @@
+.boardWrapper {
+    position: absolute;
+    width: 60%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background:rgba(255, 255, 255, .7);
+    box-shadow: 2px 2px 3px #ccc;
+    border-radius: 1rem;
+    overflow: hidden;
+    user-select: none;
+}
+
+.notesList {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    padding: .25rem;
+    left: 0;
+    top: 0;
+    overflow: auto;
+}
+
+.activeNoteWrapper {
+    position: absolute;
+    width: 75%;
+    height: 100%;
+    left: 25%;
+    top: 0;
+
+}
+
+.activeNote {
+    width: calc(100% - 1rem);
+    height: calc(90% - 1rem);
+    border-radius: .5rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    resize: none;
+    margin: .5rem;
+    border: none;
+}
+
+.activeNote:focus {
+    outline: none;
+}
+
+.activeNoteHeader {
+    padding: .5rem 1.5rem;
+    box-sizing: border-box;
+}
+
+input {
+    border: none;
+    border-radius: .5rem;
+}
+
+input:focus {
+    outline: none;
+}
+
+ul.notes {
+    list-style: none;
+    padding: 0;
+    margin : 0;
+}
+
+ul.notes li {
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+ul.notes:hover {
+    cursor: pointer;
+}
+
+
+.notesListHeader {
+    width: 100%;
+    padding: .5rem;
+    border-bottom: 2px solid #eee;
+}
+
+.date {
+    font-size: .7rem;
+}
