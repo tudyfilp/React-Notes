@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import NotesBoard from './NotesBoard';
 import Home from './Home';
+import Storage from './storage';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,20 +14,20 @@ class App extends React.Component {
     }
   }
 
-  handleUsernameChange = (ev) => {
+  saveUsername = (newUsername) => {
     this.setState({
-      username: ev.target.value
+      username: newUsername
     });
-    //validate username
-  }
 
+    Storage.updateActiveUser(newUsername);
+  }
   render(){
     return (
       <div className="App">
         <BrowserRouter>
           <Route exact path="/" render={(props) => 
-          <Home {...props} handleUsernameChange={this.handleUsernameChange}/>} />
-          <Route exact path="/myNotes" component={NotesBoard}/>
+          <Home {...props} saveUsername={this.saveUsername}/>} />
+          <Route exact path="/myNotes" component={NotesBoard} />
         </BrowserRouter>
       </div>
     );

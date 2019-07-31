@@ -23,7 +23,7 @@ h3::after {
     left: calc(50% - 20px);
 }
 
-input {
+input.username {
     position: relative;
     display: block;
     margin-left: 100px;
@@ -35,21 +35,22 @@ input {
     padding: .5rem;
     transition: border-color .3s ease-in-out;
     font-weight: bolder;
+    background: transparent;
 }
 
-input:focus {
+input.username:focus {
     border-color: black;
 }
 
-input::placeholder {
+input.username::placeholder {
     color: black;
 }
 
-button {
+.continueButton {
     padding: .5rem 1rem;
     position: relative;
-    margin-top: 100px;
     background: white;
+    margin-top: 100px;
     color: black;
     border: 2px solid black;
     font-weight: 700;
@@ -57,7 +58,32 @@ button {
     transition: all .3s ease-in-out;
 }
 
-button:hover {
+.continueButton:hover {
     color: white;
     background: black;
+}
+
+.options {
+    border: 2px solid transparent;
+    font-weight: bolder;
+
+}
+
+.saveNoteButton {
+    color: #00b30c;
+    border-color: #00b30c;
+    background: transparent;
+}
+
+.deleteNote {
+    color: #b32400;
+    border-color: #b32400;
+    background: transparent;
+}
+
+.createNew {
+    color: #00b2b5;
+    border-color: #00b2b5;
+    background: transparent;
+
 }

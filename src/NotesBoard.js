@@ -2,18 +2,27 @@ import React from 'react';
 import './NotesBoard.css'
 import NotesList from './NotesList';
 import ActiveNote from './ActiveNote';
+import Storage from './storage';
 
 class NotesBoard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
                         notesList: [],
-                        activeNote: {}
+                        activeNote: {},
+                        username: ''
                     }
     }
 
-    componentDidMount() {
-        this.populateNotesList();
+    async componentDidMount() {
+        const username = await Storage.getActiveUser();
+        const notes = await Storage.getUserNotes(username);
+        this.setState({
+            notesList: notes,
+            username: username,
+            activeNote: notes[0]
+        })
+        console.log(username);
     }
 
     populateNotesList = () => {
@@ -42,7 +51,9 @@ class NotesBoard extends React.Component {
 
     addNewNote = () => {
         let notes = [].concat(this.state.notesList);
-        notes.push(this.getEmptyNote(notes));
+        let newNote = this.getEmptyNote(notes);
+        notes.push(newNote);
+        Storage.addNote(this.state.username, newNote);
 
         this.setState({
             notesList: notes,
@@ -50,18 +61,21 @@ class NotesBoard extends React.Component {
         })
     }
 
-    deleteNote = (id) => {
+    deleteNote = () => {
+        let id = this.state.activeNote.id;
         let noteIndex = this.state.notesList.findIndex(note => note.id === id);
         let notes = this.state.notesList;
         
         notes.splice(noteIndex, 1);
-        
+    
         noteIndex = noteIndex > 0 ? noteIndex - 1 : 0;
 
         this.setState({
             notesList: notes,
             activeNote: this.state.notesList[noteIndex]
         }); 
+
+        Storage.deleteNote(this.state.username, id);
     
     }
     
@@ -95,6 +109,10 @@ class NotesBoard extends React.Component {
         this.setState({
             activeNote
         });
+    }
+
+    updateNote = () => {
+        Storage.updateNote(this.state.username, this.state.activeNote);
     }
 
     render() {
