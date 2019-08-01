@@ -1,5 +1,5 @@
 import { nodeInternals } from "stack-utils";
-
+import FirebaseDb from './db/db';
 class Storage {
     static getUserNotes(username){
         return JSON.parse(localStorage.getItem(username)) || [];
@@ -9,6 +9,7 @@ class Storage {
         let usersNotes = Storage.getUserNotes(username);
         usersNotes.push(note);
         localStorage.setItem(username, JSON.stringify(usersNotes));
+        FirebaseDb.addNote(username, note);
     }
 
     static deleteNote(username, noteId) {
@@ -17,6 +18,7 @@ class Storage {
         let noteIndex = usersNotes.findIndex(note => note.id == noteId);
         usersNotes.splice(noteIndex, 1);
         localStorage.setItem(username, JSON.stringify(usersNotes));
+        FirebaseDb.deleteUserNote(username, noteId);
     }
 
     static updateNote(username, note) {
@@ -27,10 +29,12 @@ class Storage {
         Object.assign(oldNote, note);
 
         Storage.saveNotes(username, usersNotes);
+        FirebaseDb.updateNote(username, note);
     }
 
     static saveNotes(username, notes) {
         localStorage.setItem(username, JSON.stringify(notes));
+        FirebaseDb.saveNotes(username, notes);
     }
 
     static updateActiveUser(username) {
