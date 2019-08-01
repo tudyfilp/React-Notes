@@ -35,7 +35,6 @@ class Home extends React.Component {
                         history.push('/myNotes')
                     }
                          }} 
-                
               >
                 Continue
               </button>

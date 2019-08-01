@@ -1,9 +1,21 @@
 import React from 'react';
-
+import Storage from './storage';
 class NotesList extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            user: ''
+        }
     }
+
+    async componentDidMount() {
+        const user = await Storage.getActiveUser();
+
+        this.setState({
+            user: user
+        });
+    }
+ 
     getFormattedDate(date) {
         let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -25,12 +37,19 @@ class NotesList extends React.Component {
         return this.props.notes.map(note =>
          <li key={note.id} onClick={() => this.props.openNote(note)}>
              <div className="">
-                 <h6 className="noteTitle">{note.title}</h6>
+                 <h6 className="noteTitle">{this.getFormattedTitle(note.title)}</h6>
                  <h6 className="date">{this.getFormattedDate(note.timeStamp)}</h6>
                  <h6 className="description">{this.getFormattedDescription(note.description)}</h6>
              </div>
             
         </li>).reverse();
+    }
+
+    getFormattedTitle = (title) => {
+        if(title.length > 20)
+            return title.slice(0, 20) + "...";
+        else
+            return title;
     }
 
     getFormattedDescription = (description) => {
@@ -43,8 +62,9 @@ class NotesList extends React.Component {
     render(){
         return (
         <div className="notesList">
-            <div className="notesListHeader d-flex flex-row-reverse mt-2">
-                <button className="btn options createNew btn-info" onClick={this.props.addNote}>New Note</button>
+            <div className="notesListHeader d-flex flex-row mt-2">
+                <h6 className="mr-5">Hi, {this.state.user}</h6>
+                <button className="btn options createNew btn-info ml-4" onClick={this.props.addNote}>New Note</button>
             </div>
             <ul className="notes">{this.getNotes()}</ul>
         </div>

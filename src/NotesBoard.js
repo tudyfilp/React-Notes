@@ -14,13 +14,13 @@ class NotesBoard extends React.Component {
                     }
     }
 
-    async componentDidMount() {
-        const username = await Storage.getActiveUser();
-        const notes = await Storage.getUserNotes(username);
+    componentDidMount() {
+        const username = Storage.getActiveUser();
+        const notes = Storage.getUserNotes(username);
         this.setState({
             notesList: notes,
             username: username,
-            activeNote: notes[0]
+            activeNote: notes[notes.length-1]
         })
         console.log(username);
     }

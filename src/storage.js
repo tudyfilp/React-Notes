@@ -1,8 +1,8 @@
 import { nodeInternals } from "stack-utils";
 
 class Storage {
-    static async getUserNotes(username){
-        return await JSON.parse(localStorage.getItem(username)) || [];
+    static getUserNotes(username){
+        return JSON.parse(localStorage.getItem(username)) || [];
     }
 
     static async addNote(username, note) {
@@ -37,8 +37,8 @@ class Storage {
         localStorage.setItem('activeUser', JSON.stringify(username));
     }
 
-    static async getActiveUser(username) {
-        return await JSON.parse(localStorage.getItem('activeUser'));
+    static getActiveUser(username) {
+        return JSON.parse(localStorage.getItem('activeUser'));
     }
 }
 
